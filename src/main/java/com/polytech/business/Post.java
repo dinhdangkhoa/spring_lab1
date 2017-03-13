@@ -6,6 +6,7 @@ package com.polytech.business;
 public class Post {
 
     private String content;
+    private int id;
 
     public Post(String content){
         this.content = content;
