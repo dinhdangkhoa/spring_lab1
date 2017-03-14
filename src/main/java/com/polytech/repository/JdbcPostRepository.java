@@ -23,6 +23,7 @@ public class JdbcPostRepository implements PostRepository{
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO POST (CONTENT) VALUES (?)");
             preparedStatement.setString(1,post.getContent());
+            preparedStatement.execute(); //!!
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -35,7 +36,7 @@ public class JdbcPostRepository implements PostRepository{
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM POST");
             while(rs.next()){
-                posts.add(new Post(rs.getString(2)));
+                posts.add(new Post(rs.getString("CONTENT")));
             }
         } catch(SQLException e){
             e.printStackTrace();
