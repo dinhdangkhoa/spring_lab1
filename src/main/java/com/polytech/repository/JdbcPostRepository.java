@@ -42,5 +42,6 @@ public class JdbcPostRepository implements PostRepository{
             e.printStackTrace();
         }
         return posts;
+
     }
 }
