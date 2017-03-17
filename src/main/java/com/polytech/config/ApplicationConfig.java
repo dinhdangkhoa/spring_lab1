@@ -1,16 +1,11 @@
 package com.polytech.config;
 
-import com.polytech.business.PublicationService;
-import com.polytech.business.PublicationServiceImpl;
-import com.polytech.repository.JpaPostRepository;
-import com.polytech.repository.PostRepository;
-import com.polytech.view.PostController;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
@@ -23,6 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan(basePackages = "com.polytech")
 @EntityScan(basePackages = "com.polytech.business")
+@EnableJpaRepositories("com.polytech.repository")
 public class ApplicationConfig {
     @Autowired
     private Environment environment;
