@@ -21,7 +21,6 @@ import javax.sql.DataSource;
 
 @Configuration
 //@ComponentScan(basePackages = "com.polytech")
-@Import(InfracstructureConfig.class)
 
 public class ApplicationConfig {
     @Autowired
@@ -33,6 +32,7 @@ public class ApplicationConfig {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .addScripts("create-schema.sql")
+                .addScripts("default-user.sql")
                 .build();
     }
     @Bean(name = "dataSource")

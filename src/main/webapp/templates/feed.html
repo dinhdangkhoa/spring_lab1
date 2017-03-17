@@ -59,7 +59,9 @@
 </div>
 
 <div class="container">
-
+    <form th:action = "@{/logout}" method  = "post">
+        <input class="btn btn-info" type = "submit" value="Log out"/>
+    </form>
     <div class="starter-template">
         <h1>Bootstrap starter template</h1>
         <p class="lead">Use this document as a way to quickly start any new project.<br/> All you get is this text and a
@@ -68,7 +70,7 @@
     <div class="container">
         <div class="row">
             <div class="span4 well" style="padding-bottom:0">
-                <form accept-charset="UTF-8" action="/post" method="POST">
+                <form accept-charset="UTF-8" th:action='@{/post}' method="POST">
                 <textarea class="span4" name="content"
                           placeholder="what are you thinking?" rows="5"></textarea>
                     <button class="btn btn-info" type="submit" value = "post">Post New Message</button>

@@ -67,6 +67,21 @@
     </div>
     <div class = "container">
 
+        <form th:action= '@{/login}' method="post" role="form">
+            <!--expression: evaluate/chaine de caracteres: ...cherche-->
+            <legend>Form Title</legend>
+
+            <div class="form-group">
+                <label for="username"></label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="username"/>
+
+                <label for="password"></label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="password"/>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
     </div>
 
 </div><!-- /.container -->

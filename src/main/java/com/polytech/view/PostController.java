@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -29,7 +30,8 @@ public class PostController {
     }
 
     @RequestMapping(value="/post",method = RequestMethod.POST)
-    public String post(Post post,Model model){
+    public String post(Post post, Model model, Principal principal){
+        String username = principal.getName();
         publicationService.post(post);
         return home(model);
         //"redirect:/feed"
