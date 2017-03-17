@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
+        System.setProperty("spring.profiles.active","DEV");
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationConfig.class);
         PublicationService publicationService = applicationContext.getBean(PublicationService.class);
         publicationService.post(new Post("Hello Spring"));
