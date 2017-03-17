@@ -35,7 +35,7 @@ public class PostController {
     public String post(Post post, Model model, Principal principal){
         String username = principal.getName();
         publicationService.post(post);
-        return home(model);
-        //"redirect:/feed"
+        return "redirect:/feed";
+
     }
 }
