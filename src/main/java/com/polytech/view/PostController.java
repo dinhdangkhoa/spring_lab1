@@ -22,10 +22,6 @@ public class PostController {
     @Autowired
     private PublicationService publicationService;
 
-    /*public PostController(PublicationService publicationService){
-        this.publicationService = publicationService;
-    }*/
-
     @RequestMapping(value = "/feed",method = RequestMethod.GET)
     public String home(Model model){
         List<Post> posts = publicationService.fetchAll();
