@@ -29,10 +29,9 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "user")
     private List<Comment> posts = new ArrayList<Comment>();
 
-    public User() {}
+    public User() {this.enabled=true;}
 
-    public User(String username, String password,boolean enabled){this.username = username; this.password = password; this.enabled = enabled;}
-
+    public User(String username, String password){this.username = username; this.password = password; this.enabled = true;}
 
     public String getUsername() {
         return username;

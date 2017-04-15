@@ -16,6 +16,7 @@ import javax.sql.DataSource;
  */
 
 @Configuration
+@PropertySource("classpath:/application.properties")
 @ComponentScan(basePackages = "com.polytech")
 @EntityScan(basePackages = "com.polytech.business")
 @EnableJpaRepositories("com.polytech.repository")
@@ -47,17 +48,5 @@ public class ApplicationConfig {
         dataSource.setDriverClassName(driverClassName);
         return dataSource;
     }
-    /*@Bean
-    public PostRepository postRepository(DataSource dataSource){
-        return  new JpaPostRepository(dataSource);
-    }
 
-    @Bean
-    public PublicationService publicationService(PostRepository postRepository){
-        return new PublicationServiceImpl(postRepository);
-    }
-    @Bean
-    public PostController postController(PublicationService publicationService){
-        return new PostController(publicationService);
-    }*/
 }

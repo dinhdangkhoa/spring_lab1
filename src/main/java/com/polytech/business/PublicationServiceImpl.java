@@ -28,4 +28,5 @@ public class PublicationServiceImpl implements PublicationService{
     public List<Post> fetchAll() {
         return postRepository.findAll();
     }
+
 }
