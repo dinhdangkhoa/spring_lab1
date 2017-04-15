@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+</head>
+
+<body>
+<div th:fragment="commentList" th:unless="${#lists.isEmpty(comments)}" class="results-block">
+    <div class="post-comment"  th:each="comment : ${comments}">
+        <a href = "#" th:text="${comment.getUsername()}" class = "profile-link"></a>
+        <p th:text="${comment.getContent()}"></p>
+    </div>
+</div>
+</body>
+</html>

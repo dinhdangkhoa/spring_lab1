@@ -55,38 +55,40 @@
     </form>
 </div>-->
 <div class="container">
-        <div class="row-fluid">
-            <div class="col-md-12">
-                <h2> Sign in to share your story</h2>
-                <div class="col-md-offset-3 col-md-6">
-                    <div class="area">
-                        <form  class="form-horizontal" th:action= '@{/login}' method="post" role="form">
-                            <div class="heading">
-                                <h4 class="form-heading">Sign In</h4>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <h2> Sign up</h2>
+            <div class="col-md-offset-3 col-md-6">
+                <div class="area">
+                    <form  class="form-horizontal" th:action= '@{/registration}' method="post" role="form">
+                        <div class="heading">
+                            <h4 class="form-heading">Don't have account? Sign Up!</h4>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="username">Username</label>
+                            <div class="controls">
+                                <input type="text" class="form-control" name="username" id="username" placeholder="username"/>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label" for="username">Username</label>
-                                <div class="controls">
-                                    <input type="text" class="form-control" name="username" id="username" placeholder="username"/>
-                                </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="password">Password</label>
+                            <div class="controls">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="password"/>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label" for="password">Password</label>
-                                <div class="controls">
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="password"/>
-                                </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label class="checkbox">
+                                    <input type="checkbox"/>I agree all your <a href="#">Terms of Services</a>
+                                </label>
+                                <button class="btn btn-success" type="submit" value = "register">Sign Up</button>
                             </div>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <button class="btn btn-success" type="submit" value = "login">Log In</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <a th:href="@{/registration}">Don't have account? Sign up</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 </div><!-- /.container -->
 
 <!-- Bootstrap core JavaScript

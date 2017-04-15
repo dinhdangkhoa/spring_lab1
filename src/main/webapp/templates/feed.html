@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/postcomment.css"/>
     <style>
         body {
             padding-top: 50px;
@@ -37,67 +38,73 @@
 
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</div>
 
 <div class="container">
-    <form th:action = "@{/logout}" method  = "post">
-        <input class="btn btn-info" type = "submit" value="Log out"/>
+    <form th:action="@{/logout}" method="post">
+        <input class="btn btn-info" type="submit" value="Log out"/>
     </form>
     <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br/> All you get is this text and a
-            mostly barebones HTML document.</p>
+        <h1>PolytechFeed</h1>
+        <p class="lead">Share your story :)</p>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="span4 well" style="padding-bottom:0">
-                <form accept-charset="UTF-8" th:action='@{/post}' method="POST">
-                <textarea class="span4" name="content"
-                          placeholder="what are you thinking?" rows="5"></textarea>
-                    <button class="btn btn-info" type="submit" value = "post">Post New Message</button>
-                </form>
-            </div>
-        </div>
-        <!--<% List<Post> postList = (List<Post>) request.getAttribute("posts");-->
-            <!--for (Post p: postList) {-->
-        <!--%>-->
-        <!--<div class="well">-->
-            <!--<div class="media">-->
-                <!--<div class="media-body">-->
-                    <!--<p class="text-right">By username</p>-->
-                    <!--<p> <%p.getContent();%> </p>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<%}%>-->
-        <div class="well" th:each="post:${posts}">
-            <div class="media">
-                <div class="media-body">
-                    <p> <td th:text="${post.getContent()}"> </td></p>
+
+        <!-- Post Create Box
+           ================================================= -->
+        <div class="col-md-offset-3 col-md-7">
+            <div class="create-post">
+                <div class="row">
+                    <form accept-charset="UTF-8" th:action='@{/post}' method="POST">
+                        <div class="col-md-7 col-sm-7">
+                            <div class="form-group">
+                                <textarea name="content" cols="30" rows="2" class="form-control"
+                                          placeholder="Write what you wish"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                            <div class="tools">
+                                <button class="btn btn-primary pull-right" type="submit" value="post">Publish</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- Post Create Box End-->
+
+            <div class="post-content" th:each="post:${posts}">
+                <div class="post-container">
+                    <div class="post-detail">
+                        <div class="user-info">
+                            <h5 th:text="${post.getUser().getUsername()}"></h5>
+                        </div>
+                        <div class="reaction">
+                            <a class="btn text-green"><i class="icon ion-thumbsup"></i> 23</a>
+                        </div>
+                        <div class="line-divider"></div>
+                        <div class="post-text">
+                            <p>
+                                <td th:text="${post.getContent()}"></td>
+                            </p>
+                        </div>
+                        <input type="hidden" id="postid" name="postid" th:value="${post.getId()}"/>
+                        <button id="loadButton" name="loadButton"  type="button">
+                            View Comments
+                        </button>
+                        <div class="line-divider"></div>
+                        <div id="listcomment" name = "listcomment" class="post-comment">
+
+                        </div>
+                        <div class="post-comment">
+                            <!--<form  class="form-horizontal"
+                                   th:action='@{/comment/} + ${post.getId()}' method="post" role="form"
+                                   onkeydown=" if (event.keyCode == 13) this.submit();">-->
+                            <input id="comment" name="content" type="text" class="form-control"
+                                   placeholder="Post a comment"/>
+                            <!--</form>-->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-
     </div>
 
 </div><!-- /.container -->
@@ -105,7 +112,25 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('button[name=loadButton]').one("click",function(){
+            var id = $(this).closest('div').find('input[name=postid]').val();
+            var url = '/comment/' + id;
+            $(this).closest('div').find('div[name=listcomment]').load(url);
+        });
+        $('input[name=content]').keypress(function(e){
+            if(e.which == 13) {
+                var id = $(this).parent().parent().find('input[name=postid]').val();
+                var url = '/write/' + id + '/' + $(this).val();
+                $(this).parent().parent().find('div[name=listcomment]').load(url);
+                $(this).val("");
+            }
+        });
+    });
+</script>
 </body>
 </html>
