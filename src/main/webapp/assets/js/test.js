@@ -1,1 +1,0 @@
-document.getElementById("pEx").innerHTML = "Text is changed by javaScript:))";

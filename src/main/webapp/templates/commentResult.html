@@ -9,9 +9,13 @@
 
 <body>
 <div th:fragment="commentList" th:unless="${#lists.isEmpty(comments)}" class="results-block">
-    <div class="post-comment"  th:each="comment : ${comments}">
-        <a href = "#" th:text="${comment.getUsername()}" class = "profile-link"></a>
-        <p th:text="${comment.getContent()}"></p>
+    <div class="post-comment" th:each="comment : ${comments}">
+        <div style = "margin-right: 5px">
+            <a href="#" th:text="${comment.getUsername()}" class="profile-link"></a>
+        </div>
+
+            <p th:text="${comment.getContent()}"></p>
+
     </div>
 </div>
 </body>
